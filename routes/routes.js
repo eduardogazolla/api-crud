@@ -16,7 +16,7 @@ router.post('/pessoas', async (req, res) => {
 });
 
 // Obter todas as Pessoas
-router.get('/', async (req, res) => {
+router.get('/pessoas', async (req, res) => {
   try {
     const pessoas = await Pessoa.findAll();
     res.json(pessoas);
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 });
 
 // Obter Pessoa por CPF
-router.get('/pessoas/:cpf', async (req, res) => {
+router.get('/pessoas/cpf', async (req, res) => {
   try {
     
     const pessoa = await Pessoa.findOne({ where: { cpf: req.params.cpf } });
@@ -34,6 +34,65 @@ router.get('/pessoas/:cpf', async (req, res) => {
       res.json(pessoa);
     } else {
       res.status(404).json({ error: 'Pessoa not found' });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Atualizar Pessoa por CPF
+router.put('/pessoas/:cpf', async (req, res) => {
+  try {
+    const pessoa = await Pessoa.findOne({ where: { cpf: req.params.cpf } });
+    if (!pessoa) {
+      res.status(404).json({ error: 'Pessoa não encontrada.' });
+    } else {
+      await pessoa.update(req.body);
+      res.json(pessoa);
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Excluir Pessoa por CPF
+router.delete('/pessoas/:cpf', async (req, res) => {
+  try {
+    const pessoa = await Pessoa.findOne({ where: { cpf: req.params.cpf } });
+    if (!pessoa) {
+      res.status(404).json({ error: 'Pessoa não encontrada.' });
+    } else {
+      await pessoa.destroy();
+      res.json({ message: 'Pessoa excluída com sucesso.' });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Obter Pessoa por ID
+router.get('/pessoas/id/:id', async (req, res) => {
+  try {
+    const pessoa = await Pessoa.findByPk(req.params.id);
+    if (!pessoa) {
+      res.status(404).json({ error: 'Pessoa não encontrada.' });
+    } else {
+      res.json(pessoa);
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Excluir Pessoa por ID
+router.delete('/pessoas/id/:id', async (req, res) => {
+  try {
+    const pessoa = await Pessoa.findByPk(req.params.id);
+    if (!pessoa) {
+      res.status(404).json({ error: 'Pessoa não encontrada.' });
+    } else {
+      await pessoa.destroy();
+      res.json({ message: 'Pessoa excluída com sucesso.' });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });

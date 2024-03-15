@@ -18,7 +18,13 @@ const Pessoa = sequelize.define('Pessoa', {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
+    validate: {
+      isCPF(value) {
+        // Implemente a validação do CPF conforme necessário
+      }
+    }
   },
+
   status: {
     type: DataTypes.ENUM('ativo', 'inativo'),
     defaultValue: 'ativo'

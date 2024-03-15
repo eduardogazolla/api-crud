@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,13 +13,15 @@
     "cors": "^2.8.5",
     "curl": "^0.1.4",
     "express": "^4.18.3",
+    "install": "^0.13.0",
+    "npm": "^10.5.0",
     "sequelize": "^6.37.1",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
   "keywords": [],
-  "description": "",
   "devDependencies": {
     "nodemon": "^3.1.0"
-  }
+  },
+  "description": ""
 }
