@@ -16,7 +16,7 @@ router.post('/pessoas', async (req, res) => {
 });
 
 // Obter todas as Pessoas
-router.get('/pessoas', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const pessoas = await Pessoa.findAll();
     res.json(pessoas);
